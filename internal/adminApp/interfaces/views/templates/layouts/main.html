@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ .title }} | Selectify Admin</title>
+
+		<!--begin::Fonts(mandatory for all pages)-->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
+		<!--end::Fonts-->
+
+		<!--begin::Vendor Stylesheets(used for this page only)-->
+		<link href="/controlpanel/assets/plugins/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="/controlpanel/assets/plugins/vis-timeline/vis-timeline.bundle.css" rel="stylesheet" type="text/css" />
+		<!--end::Vendor Stylesheets-->
+    
+		<!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
+		<link href="/controlpanel/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="/controlpanel/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+		<!--end::Global Stylesheets Bundle-->
+</head>
+<body id="kt_body">
+
+  <!--begin::Root-->
+  <div class="d-flex flex-column flex-root">
+    <!--begin::Page-->
+    <div class="page d-flex flex-row flex-column-fluid">
+      {{ template "partials/sidemenu" . }}
+
+      {{ embed }}
+    </div>
+  </div>
+ 
+
+  <!--begin::Javascript-->
+  <script>var hostUrl = "/assets/";</script>
+
+  <!--begin::Global Javascript Bundle(mandatory for all pages)-->
+  <script src="/controlpanel/assets/plugins/global/plugins.bundle.js"></script> 
+  <script src="/controlpanel/assets/js/scripts.bundle.js"></script> 
+  <script src="/controlpanel/assets/plugins/datatables/datatables.bundle.js"></script>  
+  <script src="/controlpanel/assets/plugins/formrepeater/formrepeater.bundle.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.0/dist/purify.min.js"></script>
+  <!--end::Global Javascript Bundle-->
+  <!--end::Custom Javascript-->
+
+  {{ if .success }}
+  <script>
+    (function () {
+        Swal.fire({
+            text: "{{ .success }}",
+            icon: "success",
+            buttonsStyling: !1,
+            confirmButtonText: "Ok, got it!",
+            customClass: { confirmButton: "btn btn-primary" },
+        })
+    })();
+  </script>
+  {{ end }}
+  {{ if .error }}
+  <script>
+    (function (){
+      Swal.fire({ 
+        text: "{{ .error }}", 
+        icon: "error", 
+        buttonsStyling: !1, 
+        confirmButtonText: "Ok, got it!", 
+        customClass: { confirmButton: "btn fw-bold btn-primary" } 
+      })
+    })();
+  </script>
+  {{ end }}
+<style type="text/css"> * { scrollbar-width: thin; scrollbar-color: var(--kt-light); } *::-webkit-scrollbar { width: 6px; } *::-webkit-scrollbar-thumb { background-color: var(--kt-light); border-radius: 20px; } </style>
+</body>
+</html>

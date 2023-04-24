@@ -1,0 +1,100 @@
+package webcontrollers
+
+import (
+	"context"
+	"testing"
+
+	"github.com/alwismt/selectify/internal/adminApp/domains/customerManagement/entities"
+	"github.com/gofiber/fiber/v2"
+	"github.com/google/uuid"
+	"github.com/stretchr/testify/assert"
+	"github.com/valyala/fasthttp"
+)
+
+type mockCustomerService struct{}
+
+func (mcs *mockCustomerService) GetCustomers(ctx context.Context) ([]*entities.Customer, error) {
+	id1, _ := uuid.Parse("7a0fcf88-2b52-4a2d-8628-c5f0122fb1cc")
+	id2, _ := uuid.Parse("0ee8921c-f628-44cd-951d-62e0a4c21bed")
+	// return a mock slice of customers
+	return []*entities.Customer{
+		{
+			ID:    id1,
+			Name:  "John Doe",
+			Email: "johndoe@example.com",
+		},
+		{
+			ID:    id2,
+			Name:  "Jane Smith",
+			Email: "janesmith@example.com",
+		},
+	}, nil
+}
+
+func TestCustomerController_Index(t *testing.T) {
+	// create a new instance of the customer controller with a mock customer service
+	customerController := NewCustomerController(&mockCustomerService{})
+
+	app := fiber.New()
+
+	ctx := app.AcquireCtx(new(fasthttp.RequestCtx))
+
+	err := customerController.Index(ctx)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// get the response body as a byte slice
+	body := ctx.Response().Body()
+	bodyString := string(body)
+
+	expectedOutput := `[{"id":"7a0fcf88-2b52-4a2d-8628-c5f0122fb1cc","name":"John Doe","email":"johndoe@example.com","phone":"","DeletedAt":null},{"id":"0ee8921c-f628-44cd-951d-62e0a4c21bed","name":"Jane Smith","email":"janesmith@example.com","phone":"","DeletedAt":null}]`
+
+	// Check the response header
+	if contentType := ctx.Response().Header.Peek("Content-Type"); string(contentType) != "application/json" {
+		t.Errorf("unexpected Content-Type header: got %s, want application/json", string(contentType))
+	}
+
+	// Check the response status code
+	if statusCode := ctx.Response().StatusCode(); statusCode != fiber.StatusOK {
+		t.Errorf("unexpected status code: got %d, want %d", statusCode, fiber.StatusOK)
+	}
+	assert.JSONEq(t, expectedOutput, bodyString)
+	// if !reflect.DeepEqual(bodyString, expectedOutput) {
+	// 	t.Fatalf("unexpected response body:\n\tgot: %v\n\twant: %v", bodyString, expectedOutput)
+	// }
+
+	if bodyString != expectedOutput {
+		t.Errorf(`unexpected response body:
+		got:
+		%s
+		want:
+		%s`, bodyString, expectedOutput)
+	}
+}
+
+// type mockCustomerServiceWithError struct{}
+
+// func (mcs *mockCustomerServiceWithError) GetCustomers(ctx context.Context) ([]*services.Customer, error) {
+// 	// return an error
+// 	return nil, errors.New("failed to retrieve customers")
+// }
+
+// func TestCustomerController_Index_Error(t *testing.T) {
+// 	// create a new instance of the customer controller with a mock customer service that returns an error
+// 	customerController := webcontrollers.NewCustomerController(&mockCustomerServiceWithError{})
+
+// 	// create a new Fiber context and HTTP request
+// 	ctx := context.Background()
+// 	req := httptest.NewRequest(http.MethodGet, "/customers", nil)
+// 	resp := httptest.NewRecorder()
+
+// 	// call the controller's Index method
+// 	err := customerController.Index(fiber.NewContext(ctx, req, resp))
+
+// 	// assert that the response status code is 500
+// 	assert.Equal(t, http.StatusInternalServerError, resp.Result().StatusCode)
+
+// 	// assert that the response body contains the error message
+// 	assert.Contains(t, resp.Body.String(), "failed to retrieve customers")
+// }

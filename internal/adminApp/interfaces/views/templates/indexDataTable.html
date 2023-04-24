@@ -1,0 +1,102 @@
+<!--begin::Wrapper-->
+<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+    <!--begin::Header-->
+    {{ template "header" . }}
+    <!--end::Header-->
+    <!--begin::Content-->
+    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <!--begin::Container-->
+        <div class="container-xxl" id="kt_content_container">
+            <!--begin::Products-->
+            <div class="card card-flush">
+                {{ if .cardHeader }}
+                <!--begin::Card header-->
+                <div class="card-header align-items-center py-5 gap-2 gap-md-5">
+                    <!--begin::Card title-->
+                    <div class="card-title">
+                        {{ if .cardHeader.search }}
+                        <form id="cardHeaderSearchForm">
+                        <!--begin::Search-->
+                        <div class="d-flex align-items-center position-relative my-1" >
+
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                                <span class="svg-icon svg-icon-1 position-absolute ms-4" id="cardHeaderSearchSubmit">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
+                                        <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+
+
+                                <input type="text" data-kt-ecommerce-product-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="{{ .cardHeader.search }}"  name="meta_title"/>
+                        </div>
+                        <!--end::Search-->
+                        </form>
+                        {{ end }}
+                    </div>
+                    <!--end::Card title-->
+                    {{ if .cardHeader.cardToolbar }}
+                    {{ $ctb := .cardHeader.cardToolbar }}
+                    <!--begin::Card toolbar-->
+                    <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
+                        {{ if $ctb.values }}
+                        <div class="w-100 mw-150px">
+                            <!--begin::Select2-->
+                            <!-- data-control="select2" data-hide-search="true" data-placeholder="Status" data-kt-ecommerce-product-filter="status" -->
+
+                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="{{ $ctb.selectName }}" data-kt-ecommerce-product-filter="status">
+                                <option>All</option>
+                                {{ range $key, $value := $ctb.values }}
+                                    <option value="{{ $key }}">{{ $value }}</option>
+                                {{ end }}
+                            </select>
+                            <!--end::Select2-->
+                        </div>
+                        {{ end }}
+                        {{ if $ctb.button }}
+                        <!--begin::Add product-->
+                        <a href="{{ $ctb.button.url }}" class="btn btn-primary">{{ $ctb.button.name }}</a>
+                        <!--end::Add product-->
+                        {{ end }}
+                    </div>
+                    <!--end::Card toolbar-->
+                    {{ end }}
+                </div>
+                <!--end::Card header-->
+                {{ end }}
+                <!--begin::Card body-->
+                <div class="card-body pt-0">
+                    <!--begin::Table-->
+                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_products_table">
+                        <!--begin::Table head-->
+                        <thead>
+                            <!--begin::Table row-->
+                            <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+                                {{ range $key, $value := .columnNames }}
+                                    <th>{{ $value }}</th>
+                                {{ end }}
+                                <th class="text-end">Action</th>
+                            </tr>
+                            <!--end::Table row-->
+                        </thead>
+                        <!--end::Table head-->
+                        <!--begin::Table body-->
+                        <tbody class="fw-semibold text-gray-600" id="ecommerce_table_body">
+                            <!--begin::Table row-->
+                           
+                        </tbody>
+                    </table>
+                    <!--end::Table-->
+                    
+                </div>
+
+
+                <!--end::Card body-->
+            </div>
+        </div>
+    
+    </div>
+</div>  
+<style> .dataTables_wrapper .dataTables_paginate { float: right; margin-left: auto; } .dataTables_wrapper .dataTables_length { float: left; margin-top: 2px; margin-bottom: 2px; } .dataTables_wrapper .dt-buttons { float: flex; margin: 15px 15px; gap: 5px; }</style>
+<script defer src="/controlpanel/assets/js/dataTable.js"></script>

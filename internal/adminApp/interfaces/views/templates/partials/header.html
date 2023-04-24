@@ -1,0 +1,45 @@
+{{ define "header" }}
+<div id="kt_header" class="header">
+    <!--begin::Container-->
+    <div class="container d-flex flex-stack flex-wrap gap-2" id="kt_header_container">
+        <!--begin::Page title-->
+        <div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap me-lg-2 pb-5 pb-lg-0" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', lg: '#kt_header_container'}">
+            <!--begin::Heading-->
+            <h1 class="d-flex flex-column text-dark fw-bold my-0 fs-1">{{ .breadcrumb.name }}</h1>
+            <!--end::Heading-->
+            <!--begin::Breadcrumb-->
+            
+            <ul class="breadcrumb breadcrumb-dot fw-semibold fs-base my-1">
+                
+                <li class="breadcrumb-item text-muted">{{ .breadcrumb.name }}</li>
+                <li class="breadcrumb-item text-dark">{{ .title }}</li>
+            </ul>
+            <!--end::Breadcrumb-->
+        </div>
+        <!--end::Page title=-->
+        <!--begin::Wrapper-->
+        <div class="d-flex d-lg-none align-items-center ms-n2 me-2">
+            <!--begin::Aside mobile toggle-->
+            <div class="btn btn-icon btn-active-icon-primary" id="kt_aside_toggle">
+                <!--begin::Svg Icon | path: icons/duotune/abstract/abs015.svg-->
+                <span class="svg-icon svg-icon-1 mt-1">
+                    <img src="/controlpanel/assets/svg/hamburgemenu.svg" alt="menu">
+                </span>
+                <!--end::Svg Icon-->
+            </div>
+            <!--end::Aside mobile toggle-->
+            <!--begin::Logo-->
+            <a href="/controlpanel/dashboard" class="d-flex align-items-center">
+                <img alt="Logo" src="/controlpanel/assets/media/logos/demo3.svg" class="theme-light-show h-20px" />
+                <img alt="Logo" src="/controlpanel/assets/media/logos/demo3-dark.svg" class="theme-dark-show h-20px" />
+            </a>
+            <!--end::Logo-->
+        </div>
+        <!--end::Wrapper-->
+        <!--begin::Topbar-->
+        {{ template "topbar" . }}
+        <!--end::Topbar-->
+    </div>
+    <!--end::Container-->
+</div>
+{{ end }}

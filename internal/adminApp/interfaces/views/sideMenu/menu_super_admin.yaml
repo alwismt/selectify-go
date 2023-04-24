@@ -1,0 +1,107 @@
+# Analytics and Reporting
+- name: "Analytics and Reporting"
+  url: "#"
+  sub_menu:
+    - name: "Sales Reports"
+      url: "#"
+    - name: "Traffic Reports"
+      url: "#"
+    - name: "Conversion Reports"
+      url: "#"
+    - name: "Abandoned Cart Reports"
+      url: "#"
+    - name: "Customer Reports"
+      url: "#"
+    - name: "Inventory Reports"
+      url: "#"
+
+# Content Management
+- name: "Content Management"
+  url: "#"
+  sub_menu:
+    - name: "Pages"
+      url: "#"
+    - name: "Knowledgebase"
+      url: "#"
+    - name: "FAQ"
+      url: "#"
+
+# Customer Management
+- name: "Customer Management"
+  url: "#"
+  sub_menu:
+    - name: "Customer Profiles"
+      url: "/controlpanel/customer"
+
+# Marketing and Promotions
+- name: "Marketing and Promotions"
+  url: "#"
+  sub_menu:
+    - name: "Discount Codes"
+      url: "#"
+    - name: "Promotional Campaigns"
+      url: "#"
+    - name: "Email marketing campaign"
+      url: "#"
+
+# Order Management
+- name: "Order Management"
+  sub_menu:
+    - name: "Customer orders"
+      url: "#"
+    - name: "Orders by PG"
+      url: "#"
+
+# Payment Gateway Integration
+- name: "Payment Gateway Integration"
+  url: "#"
+  sub_menu:
+    - name: "Paypal"
+      url: "#"
+    - name: "Stripe"
+      url: "#"
+    - name: "2Checkout"
+      url: "#"
+    - name: "Authorize.Net"
+      url: "#"
+    - name: "Amazon Pay"
+      url: "#"
+    - name: "Cash On Deliver"
+      url: "#"
+
+# Product Management
+- name: "Product Management"
+  url: "/url/something"
+  sub_menu:
+    - name: "Products"
+      url: "/url/something"
+    - name: "Categories"
+      url: "/url/something"
+    - name: "Sub Categories"
+      url: "/url/something"
+    - name: "Variants"
+      url: "/url/something"
+
+# Security Management
+- name: "Security Management"
+  url: "#"
+  sub_menu:
+    - name: "Security Audits"
+      url: "#"
+    - name: "Backup and recovery system"
+      url: "#"
+
+# Shipping Management
+- name: "Shipping Management"
+  url: "#"
+
+# Site Management
+- name: "Site Management"
+  url: "#"
+  sub_menu:
+    - name: "Google Analitics"
+      url: "#"
+    - name: "Reward System"
+      url: "/url/something"
+    - name: "Site Settings"
+      url: "/url/something"

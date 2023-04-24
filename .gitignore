@@ -1,0 +1,5 @@
+/vendor/
+.env
+**/cover.out
+/bin/*
+/data/*
